@@ -11,6 +11,8 @@ def parse(line):
     if not line.lstrip():
         return {}
     """find the second occurence of a quote mark:"""
+    if line.find("export=")==0:
+        line=line.replace("export=","")
     quote_delimit = max(line.find('\'', line.find('\'') + 1),
                         line.find('"', line.rfind('"')) + 1)
     """find first comment mark after second quote mark"""
@@ -33,8 +35,8 @@ class EnvFile(dict):
         for k, v in kwargs.items():
             self[k] = v
 
-    def load(self):
-        """load env variables from a file"""
+    def get(self):
+        """return a dictionary wit .env file variables"""
         variables = {}
         with open(self.path, 'r') as dotenv:
             for line in dotenv.readlines():
@@ -58,38 +60,25 @@ class EnvFile(dict):
 
 
 @public.add
-def load(path=".env"):
-    """load .env file variables and return a dictionary"""
+def get(path=".env"):
+    """return a dictionary wit .env file variables"""
     if not path:
         path = ".env"
     data = dict()
     for path in values.get(path):
+        if not os.path.exists(path):
+            raise OSError("%s NOT EXISTS" % os.path.abspath(path))
         data.update(EnvFile(path))
     return data
 
 
 @public.add
-def setup(path=".env"):
-    """load .env file variables and set environment variables"""
+def load(path=".env"):
+    """set environment variables from .env file"""
     if not path:
         path = ".env"
     for path in values.get(path):
-        os.environ.update(load(path))
-
-
-@public.add
-def get(variable, default=None):
-    """return the value for variable if variable is in the file, else default"""
-    data = load()
-    if default is None:
-        return data.get(variable)
-    return data.get(variable, default)
-
-
-@public.add
-def update(**kwargs):
-    """update .env file"""
-    env = EnvFile(".env")
-    for k, v in kwargs.items():
-        env[k] = v
-    env.save()
+        path = os.path.abspath(os.path.expanduser(path))
+        if not os.path.exists(path):
+            raise OSError("%s NOT EXISTS" % path)
+        os.environ.update(get(path))

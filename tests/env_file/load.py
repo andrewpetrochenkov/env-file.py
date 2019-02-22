@@ -4,8 +4,8 @@ import os
 
 os.chdir(os.path.dirname(__file__))
 
-data = env_file.load()
-print(data)
-
-data = env_file.load([".env", "dev.env"])
-print(data)
+env_file.load()
+env_file.load(".env")
+env_file.load([".env","dev.env"])
+for var, value in os.environ.items():
+    print("%s=%s" % (var,value))
