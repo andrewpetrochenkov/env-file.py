@@ -30,8 +30,6 @@ class EnvFile(dict):
 
     def __init__(self, path, **kwargs):
         self.path = os.path.abspath(os.path.expanduser(path))
-        if os.path.exists(self.path):
-            self.load()
         for k, v in kwargs.items():
             self[k] = v
 
@@ -43,6 +41,9 @@ class EnvFile(dict):
                 variables.update(parse(line))
         dict.__init__(self, **variables)
         return self
+
+    def load(self):
+        os.environ.update(self.get())
 
     def save(self):
         """save a dictionary to a file"""
