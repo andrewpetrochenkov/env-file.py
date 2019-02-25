@@ -11,8 +11,8 @@ def parse(line):
     if not line.lstrip():
         return {}
     """find the second occurence of a quote mark:"""
-    if line.find("export=")==0:
-        line=line.replace("export=","")
+    if line.find("export=") == 0:
+        line = line.replace("export=", "")
     quote_delimit = max(line.find('\'', line.find('\'') + 1),
                         line.find('"', line.rfind('"')) + 1)
     """find first comment mark after second quote mark"""
@@ -30,20 +30,14 @@ class EnvFile(dict):
 
     def __init__(self, path, **kwargs):
         self.path = os.path.abspath(os.path.expanduser(path))
+        if os.path.exists(self.path):
+            for line in open(self.path).read().splitlines():
+                self.update(parse(line))
         for k, v in kwargs.items():
             self[k] = v
 
-    def get(self):
-        """return a dictionary wit .env file variables"""
-        variables = {}
-        with open(self.path, 'r') as dotenv:
-            for line in dotenv.readlines():
-                variables.update(parse(line))
-        dict.__init__(self, **variables)
-        return self
-
     def load(self):
-        os.environ.update(self.get())
+        os.environ.update(self)
 
     def save(self):
         """save a dictionary to a file"""
