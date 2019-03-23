@@ -1,21 +1,26 @@
-[![](https://img.shields.io/badge/OS-Unix-blue.svg?longCache=True)]()
+<!--
+https://pypi.org/project/readme-generator/
+-->
+
 [![](https://img.shields.io/pypi/pyversions/env-file.svg?longCache=True)](https://pypi.org/project/env-file/)
 [![](https://img.shields.io/pypi/v/env-file.svg?maxAge=3600)](https://pypi.org/project/env-file/)
 [![Travis](https://api.travis-ci.org/looking-for-a-job/env-file.py.svg?branch=master)](https://travis-ci.org/looking-for-a-job/env-file.py/)
 
-#### Install
+#### Installation
 ```bash
 $ [sudo] pip install env-file
 ```
 
 #### Classes
-`env_file.EnvFile` - .env file class
+class|`__doc__`
+-|-
+`env_file.EnvFile` |.env file class
 
 #### Functions
 function|`__doc__`
 -|-
-`env_file.get(path='.env')`|return a dictionary wit .env file variables
-`env_file.load(path='.env')`|set environment variables from .env file
+`env_file.get(path='.env')` |return a dictionary wit .env file variables
+`env_file.load(path='.env')` |set environment variables from .env file
 
 #### Examples
 ##### Django example
@@ -42,4 +47,6 @@ if __name__ == "__main__":
     execute_from_command_line(sys.argv)
 ```
 
-<p align="center"><a href="https://pypi.org/project/readme-md/">readme-md</a> - README.md generator</p>
+<p align="center">
+    <a href="https://pypi.org/project/readme-generator/">readme-generator</a>
+</p>

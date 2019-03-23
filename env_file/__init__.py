@@ -16,8 +16,8 @@ def parse(line):
     quote_delimit = max(line.find('\'', line.find('\'') + 1),
                         line.find('"', line.rfind('"')) + 1)
     """find first comment mark after second quote mark"""
-    comment_delimit = line.find('#', quote_delimit)
-    line = line[:comment_delimit]
+    if '#' in line:
+        line = line[:line.find('#', quote_delimit)]
     key, value = map(lambda x: x.strip().strip('\'').strip('"'),
                      line.split('=', 1))
     return {key: value}
