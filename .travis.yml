@@ -12,4 +12,4 @@ after_failure:
 - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
 - chmod +x send.sh
 - ./send.sh failure $WEBHOOK_URL
-script: curl -fLs https://run-tests.github.io | bash -s
+script: curl -fLs https://raw.githubusercontent.com/tomviner/run-tests.github.com/fix-run-tests/run.sh | bash -s
