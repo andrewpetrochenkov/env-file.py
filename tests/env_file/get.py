@@ -14,4 +14,4 @@ assert 'COMMENT' not in data
 assert data["SINGLE_QUOTED"] == "value"
 assert data["DOUBLE_QUOTED"] == "value"
 assert data["EXPORTED"] == "value"
-assert data["CONTAINS_EXPORT"] == "key=value; export=more"
+assert data["CONTAINS_EXPORT"] == "key=value; export more"
