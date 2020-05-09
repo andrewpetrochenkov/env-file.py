@@ -12,7 +12,7 @@ def parse(line):
         return {}
     """find the second occurence of a quote mark:"""
     if line.find("export=") == 0:
-        line = line.replace("export=", "")
+        line = line.replace("export=", "", 1)
     quote_delimit = max(line.find('\'', line.find('\'') + 1),
                         line.find('"', line.rfind('"')) + 1)
     """find first comment mark after second quote mark"""
