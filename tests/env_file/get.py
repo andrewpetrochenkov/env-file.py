@@ -9,3 +9,8 @@ print(data)
 
 assert data["PGDATA"] == "/var/lib/postgresql/data"
 assert data["POSTGRES_USER"] == "postgres"
+
+assert 'COMMENT' not in data
+assert data["SINGLE_QUOTED"] == "value"
+assert data["DOUBLE_QUOTED"] == "value"
+assert data["EXPORTED"] == "value"
