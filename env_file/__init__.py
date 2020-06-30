@@ -1,6 +1,7 @@
-#!/usr/bin/env python
+__all__ = ['EnvFile', 'get', 'load']
+
+
 import os
-import public
 import values
 
 
@@ -23,7 +24,6 @@ def parse(line):
     return {key: value}
 
 
-@public.add
 class EnvFile(dict):
     """.env file class"""
     path = None
@@ -54,7 +54,6 @@ class EnvFile(dict):
         super(EnvFile, self).__delitem__(key)
 
 
-@public.add
 def get(path=".env"):
     """return a dictionary wit .env file variables"""
     if not path:
@@ -67,7 +66,6 @@ def get(path=".env"):
     return data
 
 
-@public.add
 def load(path=".env"):
     """set environment variables from .env file"""
     if not path:

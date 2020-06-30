@@ -1,14 +1,7 @@
-from setuptools import setup
+import setuptools
 
-setup(
+setuptools.setup(
     name='env-file',
-    version='2020.5.9',
-    install_requires=[
-        'public',
-        'setuptools',
-        'values',
-    ],
-    packages=[
-        'env_file',
-    ],
+    install_requires=open('requirements.txt').read().splitlines(),
+    packages=setuptools.find_packages()
 )
