@@ -11,6 +11,8 @@ def parse(line):
         return {}
     if not line.lstrip():
         return {}
+    if not "=" in line:
+        return {}
     """find the second occurence of a quote mark:"""
     if line.find("export ") == 0:
         line = line.replace("export ", "", 1)
